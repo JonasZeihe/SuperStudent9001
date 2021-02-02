@@ -17,7 +17,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PutMapping("order/{productID}")
+    @GetMapping("order")
     public Optional<Order> orderProduct(@RequestParam Optional<String> productID) {
         Optional<Order> order =  orderService.addProductToOrder(productID.orElse(""));
         return  order;

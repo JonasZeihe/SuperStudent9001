@@ -5,6 +5,7 @@ import de.neuefische.studentdb.model.Product;
 import de.neuefische.studentdb.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,14 @@ public class ProductController {
     @PutMapping
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
+    }
+
+    @PutMapping("multi")
+    public List<Product> addProducts(@RequestBody Product[] products) {
+        List<Product> result = new ArrayList<>();
+        for (Product product : products) {
+            result.add(productService.addProduct(product));
+        }
+        return result;
     }
 }
