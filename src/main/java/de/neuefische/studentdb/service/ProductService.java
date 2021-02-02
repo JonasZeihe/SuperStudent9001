@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Service
 public class ProductService {
 
     ProductDb productDb;
@@ -25,4 +25,11 @@ public class ProductService {
         } return result;
     }
 
+    public  List<Product> getAllProductsList() {
+        return  productDb.getProductList();
+    }
+
+    public  Product addProduct(Product product) {
+        return  productDb.addProduct(product);
+    }
 }

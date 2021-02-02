@@ -10,30 +10,25 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("products")
-
 public class ProductController {
-    ProductDb productDb = new ProductDb();
     ProductService productService;
 
-    public ProductController() {
-        this.productService = new ProductService(this.productDb);
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping
-    public List<Product> listProducts() {
-
-        return productDb.getProductList();
-    }
-
-    @GetMapping("{name}")
-    public List<Product> getProductByName(@RequestParam Optional<String> name){
+    @GetMapping()
+    public List<Product> getProductByName( @RequestParam Optional<String> name){
         return productService.getProductList(name.orElse(""));
+    }
+
+    @GetMapping("all")
+    public List<Product> getAllProducts() {
+        return  productService.getAllProductsList();
     }
 
     @PutMapping
     public Product addProduct(@RequestBody Product product) {
-        return productDb.addProduct(product);
+        return productService.addProduct(product);
     }
-
-
 }
